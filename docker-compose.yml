@@ -9,7 +9,7 @@ services:
             - "80:80"
         restart: always
         volumes:
-            - ./src/public:/var/www/html
+            - ./www:/var/www
             - ./etc/nginx/logs/:/var/log/nginx/
             - ./etc/nginx/sites-enabled/:/etc/nginx/conf.d/
         depends_on:
@@ -24,7 +24,7 @@ services:
             - "9000"
         restart: always
         volumes:
-            - ./src/public:/var/www/html
+            - ./www:/var/www
     mysql:
         container_name: mysql
         build:

@@ -20,7 +20,7 @@ ___
 
 ## Pré Requisitos
 
-Este projeto foi criado e testado no sistema operacional `Windows 10 64`. Entretando pode funcionar normalmente no Windows e MacOS.
+Este projeto foi criado e testado no sistema operacional `Windows 10 64`. Entretando pode funcionar normalmente no Windows, Linux e MacOS.
 
 Os requisitos abaixo devem estar disponíveis em seu sistema operacional:
 
@@ -85,7 +85,7 @@ cd docker-pjc
 │   │   └── Dockerfile
 │   └── phpmyadmin
 │       └── Dockerfile
-├── src
+├── www
 │   └── public
 │       └── index.php
 ├── .gitignore
@@ -119,3 +119,10 @@ ___
     ```sh
     docker-compose down -v
     ```
+
+5. Instalação do Framework Laravel 7 e suas dependências:
+    
+    ```sh
+    compose install
+    ```
+
