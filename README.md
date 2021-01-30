@@ -126,3 +126,14 @@ ___
     compose install
     ```
 
+5. Criando Tabelas no Banco:
+    
+    ```sh
+    php artisan migrate
+
+6. Populando as Tabelas no Banco:
+    
+    ```sh
+    php artisan db:seed
+    ```
+
