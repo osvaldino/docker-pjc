@@ -16,9 +16,3 @@ etc/nginx/logs/*
 # ----------------------------------------
 data/mysql/*
 !data/mysql/.gitkeep
-
-# ----------------------------------------
-# Arquivos fonte
-# ----------------------------------------
-src/public/*
-!src/public/index.php

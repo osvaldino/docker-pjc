@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AlbumSeeder extends Seeder
 {
@@ -30,7 +31,9 @@ class AlbumSeeder extends Seeder
         foreach (self::$albums as $album)
             DB::table('albums')->insert([
                 'artist_id' => $album['artist_id'],
-                'title' => $album['title']
+                'title' => $album['title'],
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
     }
 }
