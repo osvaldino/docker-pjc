@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Artist;
 
 class ArtistController extends Controller
@@ -14,9 +15,20 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        $artistas = Artist::all();
+        $result = Artist::All();
 
-        return response()->json(compact('artistas'));
+        return response()->json(compact('result'));
+    }
+
+    public function getArtista($search)
+    {
+        $result = DB::table('artists')
+        ->join('albums', 'artists.id', '=', 'albums.artist_id')
+        ->select('artists.*', 'albums.title')
+        ->where('artists.name', 'LIKE', '%'.$search.'%' )
+        ->get();
+
+        return response()->json(compact('result'));
     }
 
     /**
@@ -46,11 +58,15 @@ class ArtistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($request)
     {
-        $artista = Artist::find($id);
+        $result = DB::table('artists')
+        ->join('albums', 'artists.id', '=', 'albums.artist_id')
+        ->select('artists.*', 'albums.title')
+        ->where('artists.id', '=', $request )
+        ->get();
 
-        return response()->json(compact('artista'));
+        return response()->json(compact('result'));
     }
 
     /**

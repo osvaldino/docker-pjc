@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Album;
+use App\Artist;
 
 class AlbumController extends Controller
 {
@@ -13,7 +16,9 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
+        $albums = Album::all();
+
+        return response()->json(compact('albums'));
     }
 
     /**
@@ -43,9 +48,30 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getAlbumsDesc($search)
     {
-        //
+        $result = DB::table('albums')
+        ->join('artists', 'albums.artist_id', '=', 'artists.id')
+        ->select('albums.*', 'artists.name')
+        ->where('artists.name', 'LIKE', '%'.$search.'%')
+        ->orWhere('albums.title', 'LIKE', '%'.$search.'%')
+        ->orderByDesc('albums.title')
+        ->get();
+
+        return response()->json(compact('result'));
+    }
+
+    public function getAlbumsAsc($search)
+    {
+        $result = DB::table('albums')
+        ->join('artists', 'albums.artist_id', '=', 'artists.id')
+        ->select('albums.*', 'artists.name')
+        ->where('artists.name', 'LIKE', '%'.$search.'%')
+        ->orWhere('albums.title', 'LIKE', '%'.$search.'%')
+        ->orderBy('albums.title')
+        ->get();
+
+        return response()->json(compact('result'));
     }
 
     /**

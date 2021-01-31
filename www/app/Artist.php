@@ -11,7 +11,7 @@ class Artist extends Model
     /**
      * Get the albuns for the artist.
      */
-    public function albuns()
+    public function albums()
     {
         return $this->hasMany(Album::class);
     }
