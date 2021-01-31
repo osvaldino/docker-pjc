@@ -16,9 +16,7 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $albums = Album::all();
-
-        return response()->json(compact('albums'));
+        return Album::paginate(5);
     }
 
     /**
@@ -39,7 +37,11 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $album= new Album;
+        $album->artist_id = $request->artist_id ;
+        $album->title = $request->title;
+
+        $album->save();
     }
 
     /**
@@ -80,9 +82,13 @@ class AlbumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $album = Album::find($request->id);
+        $album->artist_id = $request->artist_id ;
+        $album->title = $request->title;
+
+        $album->save();
     }
 
     /**

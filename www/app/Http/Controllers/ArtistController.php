@@ -15,9 +15,7 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        $result = Artist::All();
-
-        return response()->json(compact('result'));
+        return Artist::paginate(5);
     }
 
     public function getArtista($search)
@@ -49,7 +47,11 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        if ($request) {
+            $artist = Artist::create($request->all());
+            return response()->json(compact('artist'));
+        }
     }
 
     /**
@@ -75,9 +77,12 @@ class ArtistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        $artist = Artist::find($request->id);
+        $artist->name = $request->name;
+
+        $artist->save();
     }
 
     /**

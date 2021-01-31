@@ -32,8 +32,10 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('artistas', 'ArtistController@index');
     //Pesquisa por qualquer parte do nome do Artista
     Route::get('artistas/{search}', 'ArtistController@getArtista');
-
-    Route::get('artistas/{id}', 'ArtistController@show');
+    //Cadastra Artista individualmente, informando somente o nome
+    Route::post('artistas/cadastrar', 'ArtistController@store');
+    //Cadastra Artista individualmente, informando somente o nome
+    Route::put('artistas/editar', 'ArtistController@edit');
 
 
     //ALBUM
@@ -43,9 +45,13 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('albuns/{search}/d', 'AlbumController@getAlbumsDesc');
     //Pesquisa Album por parte do nome de Artista ou Album e exibe em ordem ASC
     Route::get('albuns/{search}/a', 'AlbumController@getAlbumsAsc');
+    //Cadastra Album informando o Titulo e o ID do Artista
+    Route::post('albuns/cadastrar', 'AlbumController@store');
+    //Editar Album informando os dados para alteração
+    Route::put('albuns/editar', 'AlbumController@edit');
 
 
     //POST - Criar
-    //GET - Ler
+
     //PUT - Atualizar
 });
