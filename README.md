@@ -123,7 +123,7 @@ ___
 5. Instalação do Framework Laravel 7 e suas dependências:
     
     ```sh
-    compose install
+    composer install
     ```
 
 6. Renomear arquivo `.env.example` para `.env` dentro da pasta `www`
