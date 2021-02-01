@@ -27,20 +27,14 @@ class AlbumController extends Controller
      */
     public function getURLImageAlbum($id)
     {
-        $url = Storage::disk('minio')->url('album-1.jpg');
+        $album = Album::find($id);
+        $url = Storage::disk('minio')->url($album->img_capa);
+        $album->img_capa = $url;
 
-        return response()->json(compact('url'));
+
+        return response()->json(compact('album'));
     }
 
-    public function setImgCapa(Request $request)
-    {
-
-        $img_capa = Storage::disk('minio')->put('', $request->file);
-        $request->merge(['path' => $img_capa]);
-
-        return $img_capa;
-
-    }
     /**
      * Store a newly created resource in storage.
      *

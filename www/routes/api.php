@@ -49,12 +49,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::post('albuns/cadastrar', 'AlbumController@store');
     //Editar Album informando os dados para alteração
     Route::post('albuns/editar', 'AlbumController@edit');
-    //Retorna a URL da Imagem do Album
+    //Retorna os dados do Album com a URL da Imagem com Play Minio
     Route::get('albuns/capa/{id}', 'AlbumController@getURLImageAlbum');
-    Route::post('albuns/capa', 'AlbumController@setImgCapa');
-
-
-	//Testa S3 Minio
-    Route::post('/files', 'FileController@store');
 
 });
