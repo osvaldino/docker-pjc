@@ -9,7 +9,8 @@ class Album extends Model
 {
     protected $fillable = [
         'artist_id',
-        'title'
+        'title',
+        'img_capa'
     ];
 
     public function artist()

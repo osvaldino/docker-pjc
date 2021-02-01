@@ -126,14 +126,18 @@ ___
     compose install
     ```
 
-Obs.: para rodar as Migrations e os Seeders altere DB_HOST no .env para "localhost", após as etapas 5 e 6 retorne para "mysql" para os testes da API.
+6. Renomear arquivo `.env.example` para `.env` dentro da pasta `www`
 
-5. Criando Tabelas no Banco:
+Obs.: para rodar as Migrations e os Seeders altere `DB_HOST` no `.env` para `localhost`, após as etapas 7 e 8 retorne para `mysql` para os testes da API.
+Todos os comando a seguir devem serem executados dentro do diretorio `www`
+
+7. Criando Tabelas no Banco:
     
     ```sh
     php artisan migrate
 
-6. Populando as Tabelas no Banco:
+
+8. Populando as Tabelas no Banco:
 
     ```sh
     php artisan db:seed

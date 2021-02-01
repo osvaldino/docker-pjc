@@ -17,6 +17,7 @@ class CreateAlbumsTable extends Migration
             $table->id();
             $table->foreignId('artist_id')->constrained()->onDelete('cascade');
             $table->string('title');
+            $table->string('img_capa')->nullable();
             $table->timestamps();
         });
     }

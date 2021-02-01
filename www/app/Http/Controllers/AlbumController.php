@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Album;
 use App\Artist;
+use Illuminate\Support\Facades\Storage;
 
 class AlbumController extends Controller
 {
@@ -24,11 +25,22 @@ class AlbumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getURLImageAlbum($id)
     {
-        //
+        $url = Storage::disk('minio')->url('album-1.jpg');
+
+        return response()->json(compact('url'));
     }
 
+    public function setImgCapa(Request $request)
+    {
+
+        $img_capa = Storage::disk('minio')->put('', $request->file);
+        $request->merge(['path' => $img_capa]);
+
+        return $img_capa;
+
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -84,11 +96,20 @@ class AlbumController extends Controller
      */
     public function edit(Request $request)
     {
-        $album = Album::find($request->id);
-        $album->artist_id = $request->artist_id ;
-        $album->title = $request->title;
 
-        $album->save();
+        if ($request) {
+
+            $img_capa = Storage::disk('minio')->put('', $request->file);
+            $request->merge(['path' => $img_capa]);
+
+            $album = Album::find($request->id);
+            $album->artist_id = $request->artist_id ;
+            $album->title = $request->title;
+            $album->img_capa = $img_capa;
+
+            $album->save();
+            return 'Album Atualizado';
+        }
     }
 
     /**

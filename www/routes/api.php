@@ -48,10 +48,13 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     //Cadastra Album informando o Titulo e o ID do Artista
     Route::post('albuns/cadastrar', 'AlbumController@store');
     //Editar Album informando os dados para alteração
-    Route::put('albuns/editar', 'AlbumController@edit');
+    Route::post('albuns/editar', 'AlbumController@edit');
+    //Retorna a URL da Imagem do Album
+    Route::get('albuns/capa/{id}', 'AlbumController@getURLImageAlbum');
+    Route::post('albuns/capa', 'AlbumController@setImgCapa');
 
 
-    //POST - Criar
+	//Testa S3 Minio
+    Route::post('/files', 'FileController@store');
 
-    //PUT - Atualizar
 });
